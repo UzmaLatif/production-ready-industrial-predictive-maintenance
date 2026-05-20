@@ -1,0 +1,145 @@
+2026-05-19 11:32:41 | INFO | main | ============================================================
+2026-05-19 11:32:41 | INFO | main | PREDICTIVE MAINTENANCE PIPELINE STARTED
+2026-05-19 11:32:41 | INFO | main | ============================================================
+2026-05-19 11:32:41 | INFO | main | STEP 1: Data Ingestion
+2026-05-19 11:32:41 | INFO | data_ingestion | DataIngestion initialized
+2026-05-19 11:32:41 | INFO | data_ingestion | Config loaded from: config/config.yaml
+2026-05-19 11:32:41 | INFO | data_ingestion | Loading data from: D:\Anomaly Detection\data\data.csv
+2026-05-19 11:32:41 | INFO | data_ingestion | Data loaded successfully � shape: (10000, 14)
+2026-05-19 11:32:41 | INFO | data_ingestion | Class distribution:
+Machine failure
+0    9661
+1     339
+Name: count, dtype: int64
+2026-05-19 11:32:41 | INFO | main | STEP 2: Data Preprocessing
+2026-05-19 11:32:41 | INFO | data_preprocessing | DataPreprocessing initialized
+2026-05-19 11:32:41 | INFO | data_preprocessing | Config loaded from: config/config.yaml
+2026-05-19 11:32:41 | INFO | data_preprocessing | Starting preprocessing pipeline...
+2026-05-19 11:32:41 | INFO | data_preprocessing | Dropped columns: ['UDI', 'Product ID']
+2026-05-19 11:32:41 | INFO | data_preprocessing | New features created: temp_difference, power, wear_rate
+2026-05-19 11:32:41 | INFO | data_preprocessing | Encoded column: Type
+2026-05-19 11:32:41 | INFO | data_preprocessing | Features shape: (10000, 14)
+2026-05-19 11:32:41 | INFO | data_preprocessing | Target shape: (10000,)
+2026-05-19 11:32:41 | INFO | data_preprocessing | Failure rate: 3.39%
+2026-05-20 14:33:15 | INFO | main | ============================================================
+2026-05-20 14:33:15 | INFO | main | PREDICTIVE MAINTENANCE PIPELINE STARTED
+2026-05-20 14:33:15 | INFO | main | ============================================================
+2026-05-20 14:33:15 | INFO | main | STEP 1: Data Ingestion
+2026-05-20 14:33:15 | INFO | data_ingestion | DataIngestion initialized
+2026-05-20 14:33:15 | INFO | data_ingestion | Config loaded from: config/config.yaml
+2026-05-20 14:33:15 | INFO | data_ingestion | Loading data from: D:\Anomaly Detection\data\data.csv
+2026-05-20 14:33:15 | INFO | data_ingestion | Data loaded successfully � shape: (10000, 14)
+2026-05-20 14:33:15 | INFO | data_ingestion | Class distribution:
+Machine failure
+0    9661
+1     339
+Name: count, dtype: int64
+2026-05-20 14:33:15 | INFO | main | STEP 2: Data Preprocessing
+2026-05-20 14:33:15 | INFO | data_preprocessing | DataPreprocessing initialized
+2026-05-20 14:33:15 | INFO | data_preprocessing | Config loaded from: config/config.yaml
+2026-05-20 14:33:15 | INFO | data_preprocessing | Starting preprocessing pipeline...
+2026-05-20 14:33:15 | INFO | data_preprocessing | Dropped columns: ['UDI', 'Product ID']
+2026-05-20 14:33:15 | INFO | data_preprocessing | New features created: temp_difference, power, wear_rate
+2026-05-20 14:33:15 | INFO | data_preprocessing | Encoded column: Type
+2026-05-20 14:33:15 | INFO | data_preprocessing | Features shape: (10000, 14)
+2026-05-20 14:33:15 | INFO | data_preprocessing | Target shape: (10000,)
+2026-05-20 14:33:15 | INFO | data_preprocessing | Failure rate: 3.39%
+2026-05-20 14:37:29 | INFO | main | ============================================================
+2026-05-20 14:37:29 | INFO | main | PREDICTIVE MAINTENANCE PIPELINE STARTED
+2026-05-20 14:37:29 | INFO | main | ============================================================
+2026-05-20 14:37:29 | INFO | main | STEP 1: Data Ingestion
+2026-05-20 14:37:29 | INFO | data_ingestion | DataIngestion initialized
+2026-05-20 14:37:29 | INFO | data_ingestion | Config loaded from: config/config.yaml
+2026-05-20 14:37:29 | INFO | data_ingestion | Loading data from: D:\Anomaly Detection\data\data.csv
+2026-05-20 14:37:29 | INFO | data_ingestion | Data loaded successfully — shape: (10000, 14)
+2026-05-20 14:37:29 | INFO | data_ingestion | No missing values found ✅
+2026-05-20 14:37:29 | INFO | data_ingestion | Target column 'Machine failure' found ✅
+2026-05-20 14:37:29 | INFO | data_ingestion | Class distribution:
+Machine failure
+0    9661
+1     339
+Name: count, dtype: int64
+2026-05-20 14:37:29 | INFO | data_ingestion | Data validation complete ✅
+2026-05-20 14:37:29 | INFO | main | STEP 2: Data Preprocessing
+2026-05-20 14:37:29 | INFO | data_preprocessing | DataPreprocessing initialized
+2026-05-20 14:37:29 | INFO | data_preprocessing | Config loaded from: config/config.yaml
+2026-05-20 14:37:29 | INFO | data_preprocessing | Starting preprocessing pipeline...
+2026-05-20 14:37:29 | INFO | data_preprocessing | Dropped columns: ['UDI', 'Product ID']
+2026-05-20 14:37:29 | INFO | data_preprocessing | Feature engineering complete ✅
+2026-05-20 14:37:29 | INFO | data_preprocessing | New features created: temp_difference, power, wear_rate
+2026-05-20 14:37:29 | INFO | data_preprocessing | Encoded column: Type
+2026-05-20 14:37:29 | INFO | data_preprocessing | Features shape: (10000, 14)
+2026-05-20 14:37:29 | INFO | data_preprocessing | Target shape: (10000,)
+2026-05-20 14:37:29 | INFO | data_preprocessing | Failure rate: 3.39%
+2026-05-20 14:37:29 | INFO | data_preprocessing | Feature scaling complete ✅
+2026-05-20 14:37:29 | INFO | data_preprocessing | Scaler saved to: artifacts/scaler.pkl
+2026-05-20 14:37:29 | INFO | data_preprocessing | Train size: 8000 samples
+2026-05-20 14:37:29 | INFO | data_preprocessing | Test size: 2000 samples
+2026-05-20 14:37:29 | INFO | data_preprocessing | Preprocessing pipeline complete ✅
+2026-05-20 14:37:29 | INFO | main | STEP 3: Model Training
+2026-05-20 14:37:29 | INFO | model_trainer | ModelTrainer initialized
+2026-05-20 14:37:29 | INFO | model_trainer | Config loaded from: config/config.yaml
+2026-05-20 14:37:29 | INFO | model_trainer | ============================================================
+2026-05-20 14:37:29 | INFO | model_trainer | Starting model training pipeline...
+2026-05-20 14:37:29 | INFO | model_trainer | ============================================================
+2026-05-20 14:37:29 | INFO | model_trainer | Training Random Forest Classifier...
+2026-05-20 14:37:30 | INFO | model_trainer | Random Forest training complete ✅
+2026-05-20 14:37:30 | INFO | model_trainer | 
+========================================
+2026-05-20 14:37:30 | INFO | model_trainer | Random Forest Results:
+2026-05-20 14:37:30 | INFO | model_trainer |   Precision : 1.0000
+2026-05-20 14:37:30 | INFO | model_trainer |   Recall    : 0.9706
+2026-05-20 14:37:30 | INFO | model_trainer |   F1 Score  : 0.9851
+2026-05-20 14:37:30 | INFO | model_trainer |   ROC-AUC   : 0.9853
+2026-05-20 14:37:30 | INFO | model_trainer | 
+              precision    recall  f1-score   support
+
+           0       1.00      1.00      1.00      1932
+           1       1.00      0.97      0.99        68
+
+    accuracy                           1.00      2000
+   macro avg       1.00      0.99      0.99      2000
+weighted avg       1.00      1.00      1.00      2000
+
+2026-05-20 14:37:30 | INFO | model_trainer | ========================================
+2026-05-20 14:37:30 | INFO | model_trainer | Training Isolation Forest...
+2026-05-20 14:37:31 | INFO | model_trainer | Isolation Forest training complete ✅
+2026-05-20 14:37:31 | INFO | model_trainer | 
+========================================
+2026-05-20 14:37:31 | INFO | model_trainer | Isolation Forest Results:
+2026-05-20 14:37:31 | INFO | model_trainer |   Precision : 0.8644
+2026-05-20 14:37:31 | INFO | model_trainer |   Recall    : 0.7500
+2026-05-20 14:37:31 | INFO | model_trainer |   F1 Score  : 0.8031
+2026-05-20 14:37:31 | INFO | model_trainer |   ROC-AUC   : 0.8729
+2026-05-20 14:37:31 | INFO | model_trainer | 
+              precision    recall  f1-score   support
+
+           0       0.99      1.00      0.99      1932
+           1       0.86      0.75      0.80        68
+
+    accuracy                           0.99      2000
+   macro avg       0.93      0.87      0.90      2000
+weighted avg       0.99      0.99      0.99      2000
+
+2026-05-20 14:37:31 | INFO | model_trainer | ========================================
+2026-05-20 14:37:31 | INFO | model_trainer | Comparing models...
+2026-05-20 14:37:31 | INFO | model_trainer | ✅ Random Forest selected — F1: 0.9851
+2026-05-20 14:37:32 | INFO | model_trainer | Best model saved to: artifacts/model.pkl ✅
+2026-05-20 14:37:33 | INFO | model_trainer | Confusion matrix saved ✅
+2026-05-20 14:37:34 | INFO | model_trainer | Feature importance plot saved ✅
+2026-05-20 14:37:34 | INFO | model_trainer | ============================================================
+2026-05-20 14:37:34 | INFO | model_trainer | Training complete ✅ Best model: Random Forest
+2026-05-20 14:37:34 | INFO | model_trainer | ============================================================
+2026-05-20 14:37:34 | INFO | main | ============================================================
+2026-05-20 14:37:34 | INFO | main | TRAINING PIPELINE COMPLETE ✅
+2026-05-20 14:37:34 | INFO | main | Model saved to: artifacts/model.pkl
+2026-05-20 14:37:34 | INFO | main | Scaler saved to: artifacts/scaler.pkl
+2026-05-20 14:37:34 | INFO | main | ============================================================
+2026-05-20 14:37:34 | INFO | main | Testing prediction on sample input...
+2026-05-20 14:37:34 | INFO | main | PREDICTION PIPELINE STARTED
+2026-05-20 14:37:34 | INFO | model_predictor | ModelPredictor initialized
+2026-05-20 14:37:34 | INFO | model_predictor | Model loaded from: artifacts/model.pkl ✅
+2026-05-20 14:37:34 | INFO | model_predictor | Scaler loaded from: artifacts/scaler.pkl ✅
+2026-05-20 14:37:34 | INFO | model_predictor | Making prediction on new sensor readings...
+2026-05-20 14:37:34 | INFO | model_predictor | Prediction: ✅ NORMAL OPERATION
+2026-05-20 14:37:34 | INFO | main | PREDICTION PIPELINE COMPLETE ✅

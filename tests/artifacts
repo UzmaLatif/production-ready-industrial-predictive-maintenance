@@ -1,0 +1,169 @@
+import os
+import sys
+import pickle
+import numpy as np
+import pandas as pd
+import yaml
+from src.logger import get_logger
+from src.exception import PredictiveMaintenanceException
+
+# ── Initialize logger ──────────────────────────────────────────────────────────
+logger = get_logger("model_predictor")
+
+
+class ModelPredictor:
+    """
+    Loads saved model and scaler from artifacts folder
+    and makes predictions on new sensor readings.
+    This class runs in production — it never touches training code.
+    """
+
+    def __init__(self, config_path: str = "config/config.yaml"):
+        logger.info("ModelPredictor initialized")
+        self.config = self._load_config(config_path)
+        self.model = None
+        self.scaler = None
+        self._load_artifacts()
+
+    def _load_config(self, config_path: str) -> dict:
+        """Load settings from config.yaml"""
+        try:
+            with open(config_path, "r") as f:
+                config = yaml.safe_load(f)
+            logger.info(f"Config loaded from: {config_path}")
+            return config
+        except Exception as e:
+            raise PredictiveMaintenanceException(str(e), sys)
+
+    def _load_artifacts(self) -> None:
+        """
+        Load saved model and scaler from artifacts folder.
+        These were saved during training by ModelTrainer.
+        """
+        try:
+            # Load model
+            model_path = self.config["artifacts"]["model_path"]
+            with open(model_path, "rb") as f:
+                self.model = pickle.load(f)
+            logger.info(f"Model loaded from: {model_path} ✅")
+
+            # Load scaler
+            scaler_path = self.config["artifacts"]["scaler_path"]
+            with open(scaler_path, "rb") as f:
+                self.scaler = pickle.load(f)
+            logger.info(f"Scaler loaded from: {scaler_path} ✅")
+
+        except Exception as e:
+            raise PredictiveMaintenanceException(str(e), sys)
+
+    def predict(self, input_data: dict) -> dict:
+        """
+        Make prediction on new sensor readings.
+        
+        Args:
+            input_data: Dictionary of sensor readings. Example:
+            {
+                "Type": 1,
+                "Air temperature [K]": 298.1,
+                "Process temperature [K]": 308.6,
+                "Rotational speed [rpm]": 1551,
+                "Torque [Nm]": 42.8,
+                "Tool wear [min]": 0,
+                "TWF": 0, "HDF": 0, "PWF": 0, "OSF": 0, "RNF": 0
+            }
+            
+        Returns:
+            Dictionary with prediction and confidence
+        """
+        try:
+            logger.info("Making prediction on new sensor readings...")
+
+            # Convert input to DataFrame
+            df = pd.DataFrame([input_data])
+
+            # Feature engineering — same as training
+            df = self._feature_engineering(df)
+
+            # Scale — using the SAME scaler from training
+            df_scaled = self.scaler.transform(df)
+
+            # Predict
+            prediction = self.model.predict(df_scaled)[0]
+
+            # Get confidence if Random Forest
+            confidence = None
+            if hasattr(self.model, "predict_proba"):
+                proba = self.model.predict_proba(df_scaled)[0]
+                confidence = round(float(max(proba)) * 100, 2)
+
+            # Build result
+            result = {
+                "prediction": int(prediction),
+                "status": "⚠️ MACHINE FAILURE DETECTED" if prediction == 1 else "✅ NORMAL OPERATION",
+                "confidence": f"{confidence}%" if confidence else "N/A",
+                "action": "Immediate maintenance required" if prediction == 1 else "Continue monitoring"
+            }
+
+            logger.info(f"Prediction: {result['status']}")
+            logger.info(f"Confidence: {result['confidence']}")
+
+            return result
+
+        except Exception as e:
+            raise PredictiveMaintenanceException(str(e), sys)
+
+    def _feature_engineering(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Apply same feature engineering as training.
+        CRITICAL — must be identical to preprocessing step.
+        """
+        try:
+            df["temp_difference"] = (
+                df["Process temperature [K]"] - df["Air temperature [K]"]
+            )
+            df["power"] = df["Torque [Nm]"] * df["Rotational speed [rpm]"]
+            df["wear_rate"] = df["Tool wear [min]"] * df["Torque [Nm]"]
+
+            logger.info("Feature engineering applied ✅")
+            return df
+
+        except Exception as e:
+            raise PredictiveMaintenanceException(str(e), sys)
+
+    def predict_batch(self, df: pd.DataFrame) -> pd.DataFrame:
+        """
+        Make predictions on a batch of sensor readings.
+        Useful for processing multiple machines at once.
+        
+        Args:
+            df: DataFrame with multiple rows of sensor readings
+            
+        Returns:
+            DataFrame with predictions added
+        """
+        try:
+            logger.info(f"Batch prediction on {len(df)} samples...")
+
+            # Feature engineering
+            df = self._feature_engineering(df)
+
+            # Scale
+            df_scaled = self.scaler.transform(df)
+
+            # Predict
+            predictions = self.model.predict(df_scaled)
+
+            # Add results to dataframe
+            df["prediction"] = predictions
+            df["status"] = df["prediction"].map({
+                0: "✅ Normal",
+                1: "⚠️ Failure"
+            })
+
+            failures = (predictions == 1).sum()
+            logger.info(f"Batch complete — {failures} failures detected out of {len(df)} samples ✅")
+
+            return df
+
+        except Exception as e:
+            raise PredictiveMaintenanceException(str(e), sys)
