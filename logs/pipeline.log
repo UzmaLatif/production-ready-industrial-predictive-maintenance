@@ -143,3 +143,23 @@ weighted avg       0.99      0.99      0.99      2000
 2026-05-20 14:37:34 | INFO | model_predictor | Making prediction on new sensor readings...
 2026-05-20 14:37:34 | INFO | model_predictor | Prediction: ✅ NORMAL OPERATION
 2026-05-20 14:37:34 | INFO | main | PREDICTION PIPELINE COMPLETE ✅
+2026-05-20 15:25:23 | INFO | model_predictor | ModelPredictor initialized
+2026-05-20 15:25:26 | INFO | model_predictor | Model loaded from: artifacts/model.pkl ✅
+2026-05-20 15:25:26 | INFO | model_predictor | Scaler loaded from: artifacts/scaler.pkl ✅
+2026-05-20 15:25:26 | INFO | model_predictor | ModelPredictor initialized
+2026-05-20 15:25:26 | INFO | model_predictor | Model loaded from: artifacts/model.pkl ✅
+2026-05-20 15:25:26 | INFO | model_predictor | Scaler loaded from: artifacts/scaler.pkl ✅
+2026-05-20 15:25:27 | INFO | model_predictor | ModelPredictor initialized
+2026-05-20 15:25:29 | INFO | model_predictor | Model loaded from: artifacts/model.pkl ✅
+2026-05-20 15:25:29 | INFO | model_predictor | Scaler loaded from: artifacts/scaler.pkl ✅
+2026-05-20 15:25:29 | INFO | model_predictor | ModelPredictor initialized
+2026-05-20 15:25:29 | INFO | model_predictor | Model loaded from: artifacts/model.pkl ✅
+2026-05-20 15:25:29 | INFO | model_predictor | Scaler loaded from: artifacts/scaler.pkl ✅
+2026-05-20 15:30:41 | INFO | app | Prediction request received
+2026-05-20 15:30:41 | INFO | model_predictor | Making prediction on new sensor readings...
+2026-05-20 15:30:41 | INFO | model_predictor | Prediction: ✅ NORMAL OPERATION
+2026-05-20 15:30:41 | INFO | app | Prediction served: ✅ NORMAL OPERATION
+2026-05-20 15:31:15 | INFO | app | Prediction request received
+2026-05-20 15:31:15 | INFO | model_predictor | Making prediction on new sensor readings...
+2026-05-20 15:31:15 | INFO | model_predictor | Prediction: ✅ NORMAL OPERATION
+2026-05-20 15:31:15 | INFO | app | Prediction served: ✅ NORMAL OPERATION
